@@ -7,6 +7,18 @@ import sqlite3 as sql
 app = Flask(__name__)
 
 
+conn = sql.connect('database.sqlite')
+
+cursor = conn.cursor()
+create_table_query = '''
+CREATE TABLE articles (
+    id integer PRIMARY KEY,
+    id_text text NOT NULL,
+    id_title text NOT NULL
+)'''
+
+
+
 @app.route("/search/<query>")
 def search(query=None):
     result = ''.join(query_processor.get_search_result(query))
@@ -21,7 +33,23 @@ def root(query=None):
 
 @app.route('/addrec',methods = ['POST', 'GET'])
 def addrec():
+    
+    insert_dummy_articles_query = '''
+    INSERT INTO articles (author, language, title) VALUES (?, ?)
+    '''
+    drop_articles_query = ''' DROP TABLE articles'''
+
+    cursor.execute(drop_articles_query)
+    cursor.execute(create_table_query)
+    cursor.execute(insert_dummy_articles_query, ['text', 'title'])
+    conn.commit()
+    conn.close()
+    
+    
+    '''
     if request.method == 'POST':
+        
+     
         
         try:
             with sql.connect("database.db") as con:
@@ -40,6 +68,7 @@ def addrec():
         except:
             con.rollback()
             msg = "error in insert operation"
+            '''
 
 @app.route('/list')
 def list():
