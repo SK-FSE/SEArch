@@ -22,14 +22,13 @@ def root(query=None):
 def list():
     con = sql.connect("mydatabase.db")
     con.row_factory = sql.Row
-   
     cur = con.cursor()
     cur.execute("select * from articles")
-   
-    rows = cur.fetchall();
+    rows = cur.fetchall()
     con.close()
-    return render_template("list.html",rows = rows)
+    return render_template('list.html', rows = rows)
 
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, host='0.0.0.0')
+    
