@@ -27,6 +27,7 @@ def list():
     cur.execute("select * from articles")
    
     rows = cur.fetchall();
+    con.close()
     return render_template("list.html",rows = rows)
 
 
