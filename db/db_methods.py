@@ -1,9 +1,3 @@
-"""
-input_examples: input = [('sth_1', 'id_1'),
-                         ('sth_2', 'id_2'),
-                         ('sth_3', 'id_3')]
-              or input = ('sth_1', 'id_1')
- """
 import sqlite3 as sql
 
 
