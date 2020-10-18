@@ -11,8 +11,8 @@ app = Flask(__name__)
 # get_search_result is an entrypoint for backend
 @app.route('/search/<query>')
 def search(query=None):
-    result = ''.join(query_processor.get_search_result(query))
-    return render_template('hello.html', query=result)
+    result = ' '.join(query_processor.get_search_result(query))
+    return render_template('hello.html', response=result)
 
 
 @app.route('/')
