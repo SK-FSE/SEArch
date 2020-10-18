@@ -50,7 +50,7 @@ def get_article_descriptions_by_ids(ids):
             result = []
             for id in ids:
                 cur.execute('''SELECT title FROM articles
-                                WHERE id=?''', id)
+                                WHERE id=?''',  [id])
                 rows = cur.fetchall()
                 result.append(rows[0]['text'])
             return result
@@ -66,7 +66,7 @@ def get_articles_by_ids(ids):
             result = []
             for id in ids:
                 cur.execute('''SELECT * FROM articles
-                                WHERE id=?''', id)
+                                WHERE id=?''',  [id])
                 rows = cur.fetchone()
                 result.append(rows)
             return result
