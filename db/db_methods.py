@@ -36,7 +36,7 @@ def set_article_description_by_id(input):
             else:
                 cur.execute('''UPDATE articles SET text = ?
                                 WHERE id=?''', input)
-                con.commit()      
+                con.commit()
     except Exception as e:
         con.rollback()
         msg = "set_article_description_by_id"
@@ -69,7 +69,6 @@ def get_article_description_by_id(ids):
             con.row_factory = sql.Row
             cur = con.cursor()
             result = []
-
             for id in ids:
                 cur.execute('''SELECT text FROM articles
                                 WHERE id=?''', id)
@@ -87,7 +86,6 @@ def get_article_by_id(ids):
             con.row_factory = sql.Row
             cur = con.cursor()
             result = []
-            
             for id in ids:
                 cur.execute('''SELECT title FROM articles
                                 WHERE id=?''', id)
