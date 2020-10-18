@@ -26,10 +26,15 @@ def list():
     con = sql.connect('mydatabase.db')
     con.row_factory = sql.Row
     cur = con.cursor()
+
     cur.execute('select * from articles')
     rows = cur.fetchall()
+
+    cur.execute('select * from datasets')
+    datasets = cur.fetchall()
+
     con.close()
-    return render_template('list.html', rows=rows)
+    return render_template('list.html', rows=rows, datasets=datasets)
 
 
 if __name__ == '__main__':

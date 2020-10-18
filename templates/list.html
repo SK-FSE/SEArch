@@ -17,6 +17,21 @@
             </tr>
          {% endfor %}
       </table>
+      <table border = 1>
+         <thead>
+            <td>Id</td>
+            <td>Article_id</td>
+            <td>Title</td>
+         </thead>
+
+         {% for dataset in datasets %}
+            <tr>
+               <td>{{dataset["id"]}}</td>
+               <td>{{dataset["article_id"]}}</td>
+               <td>{{dataset["title"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
 
    </body>
 </html>
