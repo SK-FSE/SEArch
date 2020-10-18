@@ -6,7 +6,7 @@ def set_dataset_by_id(article_id, dataset):
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
             cur.execute('''UPDATE datasets SET title = ?
-                            WHERE article_id=?''', (dataset,article_id))
+                            WHERE article_id=?''', (dataset, article_id))
             con.commit()
     except Exception as e:
         con.rollback()
@@ -19,7 +19,7 @@ def set_article_description_by_id(id, article_description):
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
             cur.execute('''UPDATE articles SET title = ?
-                            WHERE id=?''', (article_description,id))
+                            WHERE id=?''', (article_description, id))
             con.commit()
     except Exception as e:
         con.rollback()
@@ -27,12 +27,12 @@ def set_article_description_by_id(id, article_description):
         print(msg)
 
 
-def set_article_by_id(id,article):
+def set_article_by_id(id, article):
     try:
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
             cur.execute('''UPDATE articles SET text =?
-                            WHERE id=?''', (article,id))
+                            WHERE id=?''', (article, id))
             con.commit()
     except Exception as e:
         con.rollback()
