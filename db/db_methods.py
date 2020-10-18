@@ -7,54 +7,39 @@ input_examples: input = [('sth_1', 'id_1'),
 import sqlite3 as sql
 
 
-def set_dataset_by_id(input):
+def set_dataset_by_id(article_id, dataset):
     try:
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
-            if type(input) is list:
-                cur.executemany('''UPDATE datasets SET dataset = ?
-                                    WHERE article_id=?''', input)
-                con.commit()
-            else:
-                cur.execute('''UPDATE datasets SET dataset = ?
-                                WHERE article_id=?''', input)
-                con.commit()
+            cur.execute('''UPDATE datasets SET title = ?
+                            WHERE article_id=?''', input)
+            con.commit()
     except Exception as e:
         con.rollback()
         msg = "error in set_dataset_by_id"
         print(msg)
 
 
-def set_article_description_by_id(input):
+def set_article_description_by_id(id, article_description):
     try:
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
-            if type(input) is list:
-                cur.executemany('''UPDATE articles SET text = ?
-                                    WHERE id=?''', input)
-                con.commit()
-            else:
-                cur.execute('''UPDATE articles SET text = ?
-                                WHERE id=?''', input)
-                con.commit()
+            cur.execute('''UPDATE articles SET text = ?
+                            WHERE id=?''', (article_description,id))
+            con.commit()
     except Exception as e:
         con.rollback()
         msg = "set_article_description_by_id"
         print(msg)
 
 
-def set_article_by_id(input):
+def set_article_by_id(id,article):
     try:
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
-            if type(input) is list:
-                cur.executemany('''UPDATE articles SET title = ?
-                                    WHERE id=?''', input)
-                con.commit()
-            else:
-                cur.execute('''UPDATE articles SET title =?
-                                WHERE id=?''', input)
-                con.commit()
+            cur.execute('''UPDATE articles SET title =?
+                            WHERE id=?''', (article,id))
+            con.commit()
     except Exception as e:
         con.rollback()
         msg = "error in set_article_by_id"
@@ -63,7 +48,7 @@ def set_article_by_id(input):
 # =============================================================================
 
 
-def get_article_description_by_id(ids):
+def get_article_descriptions_by_ids(ids):
     try:
         with sql.connect("mydatabase.db") as con:
             con.row_factory = sql.Row
@@ -80,7 +65,7 @@ def get_article_description_by_id(ids):
         print(msg)
 
 
-def get_article_by_id(ids):
+def get_articles_by_ids(ids):
     try:
         with sql.connect("mydatabase.db") as con:
             con.row_factory = sql.Row
@@ -97,17 +82,17 @@ def get_article_by_id(ids):
         print(msg)
 
 
-def get_dataset_by_id(ids):
+def get_datasets_by_ids(ids):
     try:
         with sql.connect("mydatabase.db") as con:
             con.row_factory = sql.Row
             cur = con.cursor()
             result = []
             for id in ids:
-                cur.execute('''SELECT dataset FROM datasets
+                cur.execute('''SELECT title FROM datasets
                                 WHERE article_id=?''', [id])
                 rows = cur.fetchall()
-                result.append(rows[0]['dataset'])
+                result.append(rows[0]['title'])
             return result
     except Exception as e:
         msg = "dataset/s not found"
