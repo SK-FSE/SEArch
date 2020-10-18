@@ -12,11 +12,11 @@ def set_dataset_by_id(input):
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
             if type(input) is list:
-                cur.executemany('''UPDATE datasets SET dataset = ? 
+                cur.executemany('''UPDATE datasets SET dataset = ?
                                     WHERE article_id=?''', input)
                 con.commit()
             else:
-                cur.execute('''UPDATE datasets SET dataset = ? 
+                cur.execute('''UPDATE datasets SET dataset = ?
                                 WHERE article_id=?''', input)
                 con.commit()
     except Exception as e:
@@ -30,11 +30,11 @@ def set_article_description_by_id(input):
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
             if type(input) is list:
-                cur.executemany('''UPDATE articles SET text = ? 
+                cur.executemany('''UPDATE articles SET text = ?
                                     WHERE id=?''', input)
                 con.commit()
             else:
-                cur.execute('''UPDATE articles SET text = ? 
+                cur.execute('''UPDATE articles SET text = ?
                                 WHERE id=?''', input)
                 con.commit()      
     except Exception as e:
@@ -48,11 +48,11 @@ def set_article_by_id(input):
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
             if type(input) is list:
-                cur.executemany('''UPDATE articles SET title = ? 
+                cur.executemany('''UPDATE articles SET title = ?
                                     WHERE id=?''', input)
                 con.commit()
             else:
-                cur.execute('''UPDATE articles SET title =? 
+                cur.execute('''UPDATE articles SET title =?
                                 WHERE id=?''', input)
                 con.commit()
     except Exception as e:
@@ -71,7 +71,7 @@ def get_article_description_by_id(ids):
             result = []
 
             for id in ids:
-                cur.execute('''SELECT text FROM articles 
+                cur.execute('''SELECT text FROM articles
                                 WHERE id=?''', id)
                 rows = cur.fetchall()
                 result.append(rows[0]['text'])
@@ -89,7 +89,7 @@ def get_article_by_id(ids):
             result = []
             
             for id in ids:
-                cur.execute('''SELECT title FROM articles 
+                cur.execute('''SELECT title FROM articles
                                 WHERE id=?''', id)
                 rows = cur.fetchall()
                 result.append(rows[0]['title'])
@@ -105,9 +105,8 @@ def get_dataset_by_id(ids):
             con.row_factory = sql.Row
             cur = con.cursor()
             result = []
-
             for id in ids:
-                cur.execute('''SELECT dataset FROM datasets 
+                cur.execute('''SELECT dataset FROM datasets
                                 WHERE article_id=?''', [id])
                 rows = cur.fetchall()
                 result.append(rows[0]['dataset'])
