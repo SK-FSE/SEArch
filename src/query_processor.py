@@ -18,6 +18,6 @@ def get_search_result(query: str):
         article_dates = db_methods.get_article_date_by_ids(ids)
         hits = []
         for article in articles:
-            hits.append({'id': article[0], 'title': article[1], 'year': article[2], 'author': article[3], 'article_piece': ' '.join(article[4])})
+            hits.append({'id': article[0], 'title': article[1], 'year': article[2], 'author': ', '.join(article[3]), 'article_piece': '...'.join(article[4])})
         res['hits'] = hits
     return res
