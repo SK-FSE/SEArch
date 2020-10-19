@@ -1,5 +1,5 @@
 from model import model_service
-from db_methods import get_article_date_by_ids
+from db import db_methods
 import typing as tp
 
 
@@ -14,12 +14,9 @@ def get_search_result(query: str) -> tp.List[str]:
     else:
         ids = [x[0] for x in datasets]
         response = []
-        print(ids)
-        article_dates = get_article_date_by_ids(ids)
-        print(article_dates)
+        article_dates = db_methods.get_article_date_by_ids(ids)
         for i in range(len(ids)):
             article_string = str(datasets[i][0]) + ';' + str(datasets[i][1]) + ';' + str(datasets[i][2]) \
                              + ';' + str(article_dates[i])
             response.append(article_string)
-        # response = [x for x in datasets]
     return response

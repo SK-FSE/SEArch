@@ -72,6 +72,7 @@ def get_article_date_by_ids(ids: tp.List[int]) -> tp.List[int]:
             return result
     except Exception as e:
         msg = "article_description/s not found"
+        print(e)
         print(msg)
 
 
