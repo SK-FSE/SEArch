@@ -1,4 +1,5 @@
 import sqlite3
+from os import path, listdir, mkdir
 
 conn = sqlite3.connect('mydatabase.db')
 cursor = conn.cursor()
@@ -10,9 +11,7 @@ cursor.execute('DROP TABLE IF EXISTS datasets')
 cursor.execute('''
 CREATE TABLE articles (
   id INTEGER PRIMARY KEY,
-  title TEXT NOT NULL,
-  text TEXT NOT NULL,
-  article_date TEXT NOT NULL
+  path TEXT NOT NULL
 )
 ''')
 
@@ -25,10 +24,9 @@ CREATE TABLE datasets (
 ''')
 
 # Вставляем множество данных
-articles = [(1, 'Первая запись', 'Первое описание', '2020-06-12'),
-            (2, 'Вторая запись', 'Второе описание', '2020-07-12'),
-            (3, 'Третья запись', 'Третье описание', '2020-08-12'),
-            (4, 'Четвертая запись', 'Четвертое описание', '2020-09-12')]
+articles = []
+for filename in listdir('../articles/'):
+    articles.append(tuple([int(filename.split('-')[0]), '/articles/'+filename]))
 
 datasets = [(1, 1, 'dataset_1'),
             (2, 1, 'dataset_2'),
@@ -37,8 +35,8 @@ datasets = [(1, 1, 'dataset_1'),
             (5, 5, 'dataset_5')]
 
 cursor.executemany('''
-INSERT INTO articles (id, title, text, article_date)
-VALUES (?,?,?,?)''', articles)
+INSERT INTO articles (id, path)
+VALUES (?,?)''', articles)
 
 cursor.executemany('''
 INSERT INTO datasets (id, article_id, title)
