@@ -26,7 +26,7 @@ def search():
 
 
 @app.route('/search/results', methods=['GET', 'POST'])
-def search_request(): #when we searching again from results page
+def search_request():  # when we searching again from results page
 
     res = session.get('data', None)
     search_text = request.form.get('search_text')
