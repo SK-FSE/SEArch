@@ -1,4 +1,5 @@
 import sqlite3
+from db_methods import get_datasets_by_ids
 
 conn = sqlite3.connect('mydatabase.db')
 cursor = conn.cursor()
@@ -11,7 +12,8 @@ cursor.execute('''
 CREATE TABLE articles (
   id INTEGER PRIMARY KEY,
   title TEXT NOT NULL,
-  text TEXT NOT NULL
+  text TEXT NOT NULL,
+  article_date TEXT NOT_NULL
 )
 ''')
 
@@ -24,10 +26,10 @@ CREATE TABLE datasets (
 ''')
 
 # Вставляем множество данных
-articles = [(1, 'Первая запись', 'Первое описание'),
-            (2, 'Вторая запись', 'Второе описание'),
-            (3, 'Третья запись', 'Третье описание'),
-            (4, 'Четвертая запись', 'Четвертое описание')]
+articles = [(1, 'Первая запись', 'Первое описание', '2020-06-12'),
+            (2, 'Вторая запись', 'Второе описание', '2020-07-12'),
+            (3, 'Третья запись', 'Третье описание', '2020-08-12'),
+            (4, 'Четвертая запись', 'Четвертое описание', '2020-09-12')]
 
 datasets = [(1, 1, 'dataset_1'),
             (2, 1, 'dataset_2'),
@@ -36,8 +38,8 @@ datasets = [(1, 1, 'dataset_1'),
             (5, 5, 'dataset_5')]
 
 cursor.executemany('''
-INSERT INTO articles (id, title, text)
-VALUES (?,?,?)''', articles)
+INSERT INTO articles (id, title, text, article_date)
+VALUES (?,?,?,?)''', articles)
 
 cursor.executemany('''
 INSERT INTO datasets (id, article_id, title)
