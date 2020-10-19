@@ -1,6 +1,5 @@
 import sqlite3
 from os import path, listdir, mkdir
-import os, os.path
 
 conn = sqlite3.connect('mydatabase.db')
 cursor = conn.cursor()
@@ -25,9 +24,9 @@ CREATE TABLE datasets (
 ''')
 
 # Вставляем множество данных
-articles=[]
+articles = []
 for filename in listdir('../articles/'):
-    articles.append(tuple([int(filename.split('-')[0]), '/articles/'+filename ]))
+    articles.append(tuple([int(filename.split('-')[0]), '/articles/'+filename]))
 
 datasets = [(1, 1, 'dataset_1'),
             (2, 1, 'dataset_2'),
