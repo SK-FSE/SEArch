@@ -1,0 +1,51 @@
+@font-face {
+  font-family: Baloo;
+  src: url("../static/Baloo2-Regular.ttf");
+}
+
+body {
+    margin: 0;
+    background-image: url("../static/page1/SVG/background.svg");
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 1920px 1080px;
+    border: 0px
+}
+
+
+
+.search_label{ 
+    display: block;
+    margin: 260px auto 0px;
+    max-width: 600px;
+}
+
+
+.search_area {
+    display: block;
+    margin: 40px auto 0px;
+    max-width: 800px;
+    position: relative;
+    left: 20px;
+    
+
+}
+
+.search_area input[type="text"]{
+    padding: 3px -3px;
+    background: #E9EFFF;
+    border: 0px solid #E9EFFF;
+    left: 20px;
+    font-size: 20px;
+    width: 80%;
+    font-family: Baloo;
+    padding-left: 7px;
+
+}
+
+.search_area input[type="image"]{
+    position: relative;
+    top: 11px;
+    margin: 0 0 0 -4px;
+    height: 33px;
+}
