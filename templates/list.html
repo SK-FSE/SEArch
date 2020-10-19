@@ -5,15 +5,13 @@
       <table border = 1>
          <thead>
             <td>Id</td>
-            <td>Title</td>
-            <td>Description</td>
+            <td>Path</td>
          </thead>
 
          {% for row in rows %}
             <tr>
                <td>{{row["id"]}}</td>
-               <td>{{row["title"]}}</td>
-               <td>{{row["text"]}}</td>
+               <td>{{row["path"]}}</td>
             </tr>
          {% endfor %}
       </table>

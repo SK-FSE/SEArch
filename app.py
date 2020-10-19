@@ -43,5 +43,22 @@ def download(article_id):
     return send_file(uploads)
 
 
+# tmp router to show that db works correctly
+@app.route('/list')
+def list():
+    con = sql.connect('mydatabase.db')
+    con.row_factory = sql.Row
+    cur = con.cursor()
+
+    cur.execute('select * from articles')
+    rows = cur.fetchall()
+
+    cur.execute('select * from datasets')
+    datasets = cur.fetchall()
+
+    con.close()
+    return render_template('list.html', rows=rows, datasets=datasets)
+
+
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True, host='0.0.0.0')
