@@ -1,0 +1,232 @@
+2010 i2b2/VA
+AFW
+AG News
+ARC
+ATIS
+ActivityNet
+Atari 2600 Breakout
+Atari 2600 Pong
+BDD100k
+BNC corpus
+CASIA-B
+CCGBank
+CHB-MIT
+CHiME-4
+CIFAR-10
+CIFAR-10 Image Recognition
+CIFAR-100
+CIFAR-100 Image Recognition
+CIFAR10
+CMU-MPIE
+CMU-PIE
+CMU-PS
+CNN / Daily Mail
+COCO
+CTW1500
+CUB-200-2011
+CUHK01
+CUHK03
+CamVid
+CelebA
+CelebA-HQ
+ChaLearn 2013
+ChaLearn 2016
+Charades
+Charades-STA
+Cityscapes
+CliCR
+Clothing1M
+CoNLL 2003
+CoNLL 2012
+CoNLL 2014
+CoNLL 2017
+CoQA
+Computer Chess
+DAQUAR
+DAVIS 2016
+DAVIS 2017
+DBpedia
+DCASE 2017
+DUC 2004 Task 1
+Darmstadt Noise Dataset
+DecaNLP
+DuReader
+DukeMTMC-reID
+ESC-50
+East Anglia
+Event2Mind
+Extended Cohn Kanade
+Extended Yale-B
+FDDB
+FM-IQA
+Fashion-MNIST
+GLAWI database
+GLUE
+GTA5
+Gigaword
+HICO-DET
+HMDB51
+HotpotQA
+Hutter Prize
+ICDAR 2015
+ICDAR2013
+ICDAR2015
+ICDAR2017 MLT
+ICSI Meeting Recorder Dialog Act corpus
+IMDb
+ImageNet
+ImageNet-1k
+ImageNet64x64
+Indian Classical Dance
+JAFFE
+JFLEG
+KITTI
+Kinetics
+Konan-JIEM learner corpus
+LDC2016E25
+LaSOT
+Leeds Sport Poses
+LexNorm
+LibriSpeech test-clean
+LibriSpeech test-other
+Librispeech
+Long-tail emerging entities
+MAESTRO
+MARS
+MEDPOST
+MERLoT
+MIMIC-III
+ML-100k
+ML-1M
+MMI
+MNIST
+MPII
+MS MARCO
+MSCOCO
+MSR Daily Activity3D
+MSRA-TD500
+MSRC-12
+MUG
+MapTask corpus
+Market-1501
+Maryam Iranian classical music (MICM)
+Middlebury
+MnasNet
+MobileNetV2
+MovieLens
+MovieQA
+Multi-Domain Sentiment Dataset
+Multi-Ego
+Multi-THUMOS
+MultiMNIST
+MultiNLI
+MultiRC
+NCBI disease
+NORB
+NY Regents 4th Grade Science Exams
+NarrativeQA
+New York Times Corpus
+NewsQA
+Northwestern UCLA Multiview Action3D
+OTB-100
+OTB-2013
+OTB-2015
+OTB-50
+OU-MVLP
+Occluded-LINEMOD
+OntoNotes
+Open-World VQA
+Oulu-CASIA
+PASCAL VOC 2007
+PRID2011
+PTB
+Pascal Faces
+Penn Treebank
+People in Social Context
+Places2
+PolEval 2018
+QAngaroo
+QuAC
+Quora Question Pairs
+RACE
+RGB-D
+RHP
+RecipeQA
+Rouen
+RumourEval
+SFEW
+SITW
+SNLI
+SQuAD
+SQuAD1.1
+SQuAD2.0
+SST
+STB
+STL-10
+SUBJ
+SUN397
+SVHN
+SWAG
+SciTail
+SemEval
+SemEval 2010 Task 8
+SemEval 2018
+SentEval
+ShARC
+SimpleQuestions
+Social media
+Stanford40
+Story Cloze Test
+Street View House Numbers (SVHN)
+SumMe
+Switchboard corpus
+Switchboard dialogue act corpus
+TACoS
+THUMOS 2014
+TID 2013
+TID2013
+TIMIT
+TREC
+The Fake News Challenge (FNC-1)
+Toronto COCO-QA
+Total-Text
+TrackingNet
+Treebank of Learner English
+TriviaQA
+TvSum
+UCF101
+UD
+USPTO
+UTD-MHAD
+V-COCO
+VGG-Face
+VIPeR
+VOT-2016
+VOT-2017
+VOT-2018
+VOT2017
+VOT2017/18
+VOT2018
+VQA
+VQA 2.0
+Visual Madlibs
+Visual7W
+Voice Bank corpus (VCTK)
+VoxCeleb
+WIDER Face
+WMT 2014 EN-DE
+WMT 2014 EN-FR
+WMT2014 English-French
+WMT2014 English-German
+WMT2016 English-Romanian
+WSJ eval92
+Wall Street Journal
+WebQuestions
+WikiSQL
+WikiTableQuestions
+WikiText-2
+Winograd Schema Challenge
+YCB-Video
+Yelp
+iLIDS-VID
+timit PER

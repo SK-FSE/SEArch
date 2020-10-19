@@ -1,0 +1,8 @@
+ntlk
+pickle
+tqdm
+rank_bm25
+pandas
+numpy
+fuzzywuzzy
+re
