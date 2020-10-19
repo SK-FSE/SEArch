@@ -136,8 +136,13 @@ body {
 }
 
 .dataset_part {
-	font-size: 20px;
+	font-size: 15px;
 	padding: 20px 0px 10px 100px;
-	color:#2e4362;
+	color:#6A2100;
 	text-align: justify;
+}
+
+.dataset {
+	font-weight: bold;
+	font-size: 18px;
 }

@@ -32,10 +32,11 @@ class MockModel:
     def predict(self, query, datasets=False):
         if datasets:
             # dataset_id, dataset, context to show on SERP
-            return [(1, 1985, ['author1'], 'preview message1'),
-                    (2, 1342, ['author2', 'author3'], 'preview message2'),
-                    (3, 1998, [], 'preview message3'),
-                    (4, 1753, ['1234'], 'preview message4')]
+            return [(1, 'dataset1', ['author1'], 'preview message1'),
+                    (2, 'dataset2', ['author2', 'author3'],
+                     'preview message2'),
+                    (3, 'dataset3', [], 'preview message3'),
+                    (4, 'dataset4', ['1234'], 'preview message4')]
 
         # article_id, article, preview_message
         return [(1, 'article1', 1992, ['author1', 'author2'], ['preview1', 'preview2']),

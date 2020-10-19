@@ -21,8 +21,8 @@
 		</p>
 		<p>
 			<input id="search" type="text" name="search_text" placeholder="Type to start your search">
-			<button id = "basic" type ="submit"> Basic</button> 
-			<button id = "deep" type="submit">Deep</button>
+			<input id = "basic" name="button" type ="submit" value="Basic">
+			<input id = "deep" name="button" type="submit" value="Deep">
         </p>
 
 		</form>
@@ -50,13 +50,17 @@
                 </td>
 			</tr>
 			<tr>
-				<td colspan="2" class="dataset_part">
+                <td class="dataset">
+                    {{ hit['dataset'] }}
+                </td>
+				<td class="dataset_part">
 					<blockquote>
 					<!-- part of the text with dataset from articles -->
-                        {{ hit['article_piece'] }}
+                        {{   hit['article_piece'] }}
                     </blockquote>
 				</td>
 			</tr>
+
             {% endfor %}
 
 		</table>
