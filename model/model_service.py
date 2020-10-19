@@ -1,5 +1,4 @@
-import joblib
-
+from .utils import load_data
 
 class Model:
     model = None
@@ -14,12 +13,12 @@ class Model:
             cls.__instance = object.__new__(cls)
         return cls.__instance
 
-    def _load_model(self, use_mock=True):
+    def _load_model(self, use_mock=False):
         if use_mock:
             self.model = MockModel()
 
         else:
-            self.model = joblib.load('model_name')
+            papers, f = load_data('../data/')
 
     def get_datasets_by_query(self, query):
         return self.model.predict(query, datasets=True)
