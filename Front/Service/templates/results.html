@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="SeARCH:deep search page">
+	<meta name="author" content="Group 2">
+	<title>Deep search</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='try_1_style.css') }}">
+	<!--<base href = "http://SeARCH.ru/pages">-->
+</head>
+
+<body>
+
+	<div class ="Headliner">
+		<form method="post">
+		<p>
+			<input id="year" type="number"  min="1000" name="year" onkeyup="filter()" placeholder="Year">
+			<input id="author" type="text" name="author" onkeyup="filter()" placeholder="Author">
+		</p>
+		<p>
+			<input id="search" type="text" name="search_text" placeholder="Type to start your search">
+			<button id = "basic" type ="submit"> Basic</button> 
+			<button id = "deep" type="submit">Deep</button>
+        </p>
+
+		</form>
+	</div>
+
+	<div class="Results">
+		<!-- <caption>Results</caption> -->
+		<table id="myTable">
+            {% for hit in res['hits'] %}
+			<tr class="filter">
+				<td class="year">
+					<!-- year of the article -->
+					{{ hit['year'] }}
+				</td>
+				<td class="author">
+					<!-- author -->
+					{{ hit['author'] }}
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" class="article">
+					<!-- name of the article -->
+                    <a href="results/{{ hit['id'] }}">{{ hit['title'] }}</a>
+                </td>
+			</tr>
+			<tr>
+				<td colspan="2" class="dataset_part">
+					<blockquote>
+					<!-- part of the text with dataset from articles -->
+                        {{ hit['article_piece'] }}
+                    </blockquote>
+				</td>
+			</tr>
+            {% endfor %}
+
+		</table>
+    </div>
+    <div class="statss">
+        <p>Request: "{{ res['query'] }}" Results: ({{ res['total'] }})</p>
+    </div>
+
+	<script>
+        function filter(){
+            year_filter()
+            author_filter()
+        }
+
+		function year_filter() {
+		  // Declare variables
+		  var input, filter, tab, tr, year, i, txtValue;
+		  input = document.getElementById('year');
+		  filter = input.value;
+		  tab = document.getElementById("myTable");
+		  tr = tab.getElementsByTagName('tr');
+
+		  // Loop through all list items, and hide those who don't match the search query
+		  for (i = 0; i < tr.length/3; i++) {
+		    year = tr[3*i].getElementsByClassName("year")[0];
+		    txtValue = year.textContent;
+		    //document.write(txtValue);
+		    if (txtValue.indexOf(filter) > -1) {
+		        //document.write(1);
+		      tr[3*i].style.display = "";
+		      tr[3*i+1].style.display = "";
+		      tr[3*i+2].style.display = "";
+		      //document.write(tab[i]);
+		    } else {
+              //document.write(2);
+		      tr[3*i].style.display = "none";
+		      tr[3*i+1].style.display = "none";
+		      tr[3*i+2].style.display = "none";
+		    }
+		  }
+		}
+
+		function author_filter() {
+		  // Declare variables
+		  var input, filter, tab, tr, year, i, txtValue;
+		  input = document.getElementById('author');
+		  filter = input.value.toUpperCase();
+		  tab = document.getElementById("myTable");
+		  tr = tab.getElementsByTagName('tr');
+
+		  // Loop through all list items, and hide those who don't match the search query
+		  for (i = 0; i < tr.length/3; i++) {
+		    year = tr[3*i].getElementsByClassName("author")[0];
+		    txtValue = year.textContent.toUpperCase();
+		    //document.write(txtValue);
+		    if (txtValue.indexOf(filter) > -1) {
+		        //document.write(1);
+                if (tr[3*i].style.display === "") {
+                    tr[3 * i].style.display = "";
+                    tr[3 * i + 1].style.display = "";
+                    tr[3 * i + 2].style.display = "";
+                }
+		      //document.write(tab[i]);
+		    } else {
+              //document.write(2);
+                  tr[3 * i].style.display = "none";
+                  tr[3 * i + 1].style.display = "none";
+                  tr[3 * i + 2].style.display = "none";
+		    }
+		  }
+		}
+	</script>
+
+
+
+</body>
+
+
+</html>
