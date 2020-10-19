@@ -1,5 +1,4 @@
 import sqlite3
-from db_methods import get_datasets_by_ids
 
 conn = sqlite3.connect('mydatabase.db')
 cursor = conn.cursor()
@@ -13,7 +12,7 @@ CREATE TABLE articles (
   id INTEGER PRIMARY KEY,
   title TEXT NOT NULL,
   text TEXT NOT NULL,
-  article_date TEXT NOT_NULL
+  article_date TEXT NOT NULL
 )
 ''')
 
