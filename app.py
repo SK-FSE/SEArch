@@ -11,36 +11,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 
-# frontend simulation. Frontend sends query to get_search_result
-# get_search_result is an entrypoint for backend
-# @app.route('/search/<query>')
-# def search(query=None):
-#     result = ' '.join(query_processor.get_search_result(query))
-#     return render_template('hello.html', response=result)
-
-
-# @app.route('/')
-# def root(query=None):
-#     return 'go to /search/smth'
-#
-
-# tmp router to show that db works correctly
-@app.route('/list')
-def list():
-    con = sql.connect('mydatabase.db')
-    con.row_factory = sql.Row
-    cur = con.cursor()
-
-    cur.execute('select * from articles')
-    rows = cur.fetchall()
-
-    cur.execute('select * from datasets')
-    datasets = cur.fetchall()
-
-    con.close()
-    return render_template('list.html', rows=rows, datasets=datasets)
-
-
 @app.route('/')
 def route():
     return redirect('/search')
@@ -64,13 +34,6 @@ def search_request(): #when we searching again from results page
         res = query_processor.get_search_result(search_text)
         session['data'] = res
     return render_template('results.html', res=res)
-
-
-# @app.route('/search/results/<int:article_id>', methods=['GET'])
-# def show_article_info(article_id):
-#     data = session.get('data', None)
-#     article = [x for x in data['hits'] if x['id'] == article_id][0]
-#     return render_template('article_info.html', title="Article info", article=article)
 
 
 @app.route('/search/results/<int:article_id>', methods=['GET'])
