@@ -16,7 +16,8 @@ def get_search_result(query: str) -> tp.List[str]:
         response = []
         article_dates = db_methods.get_article_date_by_ids(ids)
         for i in range(len(ids)):
-            article_string = str(datasets[i][0]) + ';' + str(datasets[i][1]) + ';' + str(datasets[i][2]) \
-                             + ';' + str(article_dates[i])
+            article_string = str(datasets[i][0]) + ';' \
+                    + str(datasets[i][1]) + ';' + str(datasets[i][2]) \
+                    + ';' + str(article_dates[i])
             response.append(article_string)
     return response
