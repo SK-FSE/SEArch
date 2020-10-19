@@ -1,4 +1,5 @@
 import sqlite3
+from db_methods import get_datasets_by_ids
 
 conn = sqlite3.connect('mydatabase.db')
 cursor = conn.cursor()

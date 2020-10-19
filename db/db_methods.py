@@ -15,7 +15,8 @@ def set_dataset_by_id(article_id: int, dataset: str) -> tp.NoReturn:
         print(msg)
 
 
-def set_article_description_by_id(id: int, article_description: str) -> tp.NoReturn:
+def set_article_description_by_id(id: int,
+                                  article_description: str) -> tp.NoReturn:
     try:
         with sql.connect("mydatabase.db") as con:
             cur = con.cursor()
@@ -114,7 +115,7 @@ def get_datasets_by_ids(ids: tp.List[int]) -> tp.List[int]:
             result = []
             for id in ids:
                 cur.execute('''SELECT * FROM datasets
-                                WHERE id=?''', [id])
+                                WHERE article_id=?''', [id])
                 rows = cur.fetchone()
                 result.append(rows)
             return result
