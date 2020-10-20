@@ -38,31 +38,48 @@ class BM25Okapi_custom(BM25Okapi):
             self.load_model(path)
 
     def load_model(self, path):
+        print('1')
         self.doc_freqs = json.load(Path(f'{path}/doc_freqs.json').open('r'))
+        print('2')
         self.doc_len = json.load(Path(f'{path}/doc_len.json').open('r'))
+        print('3')
         self.idf = json.load(Path(f'{path}/idf.json').open('r')) 
+        print('4')
         self.corpus_size = json.load(Path(f'{path}/corpus_size.json').open('r')) 
+        print('5')
         self.avgdl = json.load(Path(f'{path}/avgdl.json').open('r')) 
+        print('6')
         try:
           with open(f'{path}/dataset.txt', 'rb') as f:
             self.datasets = pickle.load(f)
+          print('7')
           self.preprocessed_texts = json.load(Path(f'{path}/preprocessed_texts.json').open('r')) 
+          print('8')
           self.df = pd.read_csv(f'{path}/df.csv')
-        except:
+        except Exception as e:
+          print(e)
           self.datasets = None
           self.preprocessed_texts = None
           self.df = None
 
     def save_model(self, path):
+        print('9')
         json.dump(self.doc_freqs, Path(f'{path}/doc_freqs.json').open('w'))
+        print('10')
         json.dump(self.doc_len, Path(f'{path}/doc_len.json').open('w'))
+        print('11')
         json.dump(self.idf, Path(f'{path}/idf.json').open('w'))
+        print('12')
         json.dump(self.corpus_size, Path(f'{path}/corpus_size.json').open('w'))
+        print('13')
         json.dump(self.avgdl, Path(f'{path}/avgdl.json').open('w'))
+        print('14')
         with open(Path(f'{path}/dataset.txt'), 'wb') as f:
           pickle.dump(self.datasets, f)
         self.df.to_csv(f'{path}/df.csv')
+        print('14')
         json.dump(self.preprocessed_texts, Path(f'{path}/preprocessed_texts.json').open('w'))
+        print('14')
 
     def get_top_n_indices(self, query, documents, n=5):
 
