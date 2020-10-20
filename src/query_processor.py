@@ -19,7 +19,7 @@ def get_search_result(query: str, is_deep: bool):
                 hits.append({'id': dataset[0],
                              'title': 'tmp',
                              'year': 'tmp3',
-                             'author': ', '.join(dataset[2]),
+                             'author': dataset[2],
                              'article_piece': dataset[3],
                              'dataset': dataset[1]})
             res['hits'] = hits
@@ -35,7 +35,7 @@ def get_search_result(query: str, is_deep: bool):
                 hits.append({'id': article[0],
                              'title': article[1],
                              'year': article[2],
-                             'author': ', '.join(article[3]),
+                             'author': article[3],
                              'article_piece': '...'.join(article[4])})
             res['hits'] = hits
     return res

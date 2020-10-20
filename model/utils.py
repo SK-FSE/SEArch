@@ -38,23 +38,15 @@ class BM25Okapi_custom(BM25Okapi):
             self.load_model(path)
 
     def load_model(self, path):
-        print('1')
         self.doc_freqs = json.load(Path(f'{path}/doc_freqs.json').open('r'))
-        print('2')
         self.doc_len = json.load(Path(f'{path}/doc_len.json').open('r'))
-        print('3')
         self.idf = json.load(Path(f'{path}/idf.json').open('r')) 
-        print('4')
         self.corpus_size = json.load(Path(f'{path}/corpus_size.json').open('r')) 
-        print('5')
         self.avgdl = json.load(Path(f'{path}/avgdl.json').open('r')) 
-        print('6')
         try:
           with open(f'{path}/dataset.txt', 'rb') as f:
             self.datasets = pickle.load(f)
-          print('7')
           self.preprocessed_texts = json.load(Path(f'{path}/preprocessed_texts.json').open('r')) 
-          print('8')
           self.df = pd.read_csv(f'{path}/df.csv')
         except Exception as e:
           print(e)
@@ -63,23 +55,15 @@ class BM25Okapi_custom(BM25Okapi):
           self.df = None
 
     def save_model(self, path):
-        print('9')
         json.dump(self.doc_freqs, Path(f'{path}/doc_freqs.json').open('w'))
-        print('10')
         json.dump(self.doc_len, Path(f'{path}/doc_len.json').open('w'))
-        print('11')
         json.dump(self.idf, Path(f'{path}/idf.json').open('w'))
-        print('12')
         json.dump(self.corpus_size, Path(f'{path}/corpus_size.json').open('w'))
-        print('13')
         json.dump(self.avgdl, Path(f'{path}/avgdl.json').open('w'))
-        print('14')
         with open(Path(f'{path}/dataset.txt'), 'wb') as f:
           pickle.dump(self.datasets, f)
         self.df.to_csv(f'{path}/df.csv')
-        print('14')
         json.dump(self.preprocessed_texts, Path(f'{path}/preprocessed_texts.json').open('w'))
-        print('14')
 
     def get_top_n_indices(self, query, documents, n=5):
 
@@ -100,12 +84,12 @@ class BM25Okapi_custom(BM25Okapi):
           year = self.df[self.df['title'] == title]['year'].tolist()[0]
           authors = self.df[self.df['title'] == title]['name'].tolist()[0]
           prep_paper = PaperPreprocessing(texts[index])
-          paper_model = BM25Okapi_custom(path=f"./papers_models/{'_'.join(title.lower().split())}")
+          paper_model = BM25Okapi_custom(path=f"papers_models/{'_'.join(title.lower().split())}")
           indeces = paper_model.get_top_n_indices(prep_query.get_preprocessed(), 
                                             prep_paper.get_preprocessed(), n=3)
           interesting_parts = prep_paper.get_context(indeces, left=1, right=2)
 
-          response.append((index, title, year, authors, interesting_parts))
+          response.append((str(index), title, str(year), authors, interesting_parts))
         return response
 
     def dataset_search(self, query):
@@ -121,7 +105,7 @@ class BM25Okapi_custom(BM25Okapi):
         final_result = final_result + [y for y in result1 if y not in final_result]
         final_result = final_result + [y for y in result2 if y not in final_result]
 
-        return [(ind, self.df[self.df['title']==x].year.values[0], self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
+        return [(str(ind), str(self.df[self.df['title']==x].year.values[0]), self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
             
         
 
