@@ -49,11 +49,9 @@ def search_request():  # when we searching again from results page
 def download(article_id):
     data = session.get('data', None)
     article_path = 'articles/' + str(article_id)+'*'
-    print(article_path)
     jpgFilenamesList = glob.glob(article_path)
     if len(jpgFilenamesList) > 0:
         uploads = os.path.join(current_app.root_path, jpgFilenamesList[0])
-        print(uploads)
         return send_file(uploads)
     return 'not found'
 
