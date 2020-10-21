@@ -1,5 +1,11 @@
 from .utils import *
 
+def retrain_model():
+    papers, f = load_data('data/')
+    papers = papers.sample(200)
+    train_models(papers)
+    train_search_model(papers, f)
+
 
 class Model:
     model = None
@@ -18,10 +24,6 @@ class Model:
         if use_mock:
             self.model = MockModel()
         else:
-            # papers, f = load_data('data/')
-            # papers = papers.sample(200)
-            # train_models(papers)
-            # train_search_model(papers, f)
             self.model = BM25Okapi_custom(path='papers_search/')
 
     def get_datasets_by_query(self, query):
