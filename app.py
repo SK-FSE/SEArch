@@ -8,6 +8,8 @@ import os
 from config import Config
 from model import model_service 
 import sys
+import glob
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -46,7 +48,9 @@ def search_request():  # when we searching again from results page
 @app.route('/search/results/<int:article_id>', methods=['GET'])
 def download(article_id):
     data = session.get('data', None)
-    uploads = os.path.join(current_app.root_path, 'Files', str(article_id)+'.pdf')
+    jpgFilenamesList = glob.glob('articles/' + str(article_id)+'*')
+    if len(jpgFilenamesList) > 0:
+        uploads = os.path.join(current_app.root_path, jpgFilenamesList[0])
     return send_file(uploads)
 
 

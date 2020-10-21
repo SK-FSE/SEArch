@@ -17,11 +17,11 @@ def get_search_result(query: str, is_deep: bool):
             hits = []
             for dataset in datasets:
                 hits.append({'id': dataset[0],
-                             'title': dataset[3],
-                             'year': dataset[1],
-                             'author': dataset[2],
+                             'title': dataset[4],
+                             'year': dataset[2],
+                             'author': dataset[3],
                              'article_piece': 'dataset_piece',
-                             'dataset': 'dataset_name'})
+                             'dataset': dataset[1]})
             res['hits'] = hits
 
     else:

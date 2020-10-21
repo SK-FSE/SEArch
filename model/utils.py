@@ -10,12 +10,12 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
-
+# !pip install rank_bm25
 import pandas as pd
 import numpy as np
 from rank_bm25 import BM25Okapi, BM25
 from pathlib import Path
-
+# !pip install fuzzywuzzy
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import abc
@@ -48,8 +48,7 @@ class BM25Okapi_custom(BM25Okapi):
             self.datasets = pickle.load(f)
           self.preprocessed_texts = json.load(Path(f'{path}/preprocessed_texts.json').open('r')) 
           self.df = pd.read_csv(f'{path}/df.csv')
-        except Exception as e:
-          print(e)
+        except:
           self.datasets = None
           self.preprocessed_texts = None
           self.df = None
@@ -84,7 +83,7 @@ class BM25Okapi_custom(BM25Okapi):
           year = self.df[self.df['title'] == title]['year'].tolist()[0]
           authors = self.df[self.df['title'] == title]['name'].tolist()[0]
           prep_paper = PaperPreprocessing(texts[index])
-          paper_model = BM25Okapi_custom(path=f"papers_models/{'_'.join(title.lower().split())}")
+          paper_model = BM25Okapi_custom(path=f"./papers_models/{'_'.join(title.lower().split())}")
           indeces = paper_model.get_top_n_indices(prep_query.get_preprocessed(), 
                                             prep_paper.get_preprocessed(), n=3)
           interesting_parts = prep_paper.get_context(indeces, left=1, right=2)
@@ -94,17 +93,18 @@ class BM25Okapi_custom(BM25Okapi):
 
     def dataset_search(self, query):
         texts, titles = get_text_title(self.df)
-        result1, indexes_bm = query_bm(query, self, self.datasets, self.preprocessed_texts, titles)
+        (result1, indexes_bm), right_query_name = query_bm(query, self, self.datasets, self.preprocessed_texts, titles)
         result2, indexes_query = query_table(query, self.df)
         final_result = []
         indexes = []
         for x, ind in zip(result1, indexes_bm):
-            final_result.append(x)
-            indexes.append(ind)
+            if x in result2:
+                final_result.append(x)
+                indexes.append(ind)
         final_result = final_result + [y for y in result1 if y not in final_result]
         final_result = final_result + [y for y in result2 if y not in final_result]
 
-        return [(str(ind), str(self.df[self.df['title']==x].year.values[0]), self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
+        return [(str(ind), right_query_name, str(self.df[self.df['title']==x].year.values[0]), self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
             
         
 
@@ -221,11 +221,11 @@ def query_bm(query, model, f, preprocessed_texts, titles, n = 10):
     """
     Gives list of names of the articles which contain name of the dataset in its text
     """
-    changing_for_right_query(query, f, 90)
+    query = changing_for_right_query(query, f, 1000)
     prep_query = QueryPreprocessing(query) 
     indexes = model.get_top_n_indices(prep_query.get_preprocessed(), preprocessed_texts, n=10)
     result = ([titles[i] for i in indexes], indexes)
-    return result
+    return result, query
 
 def query_table(query, df):
     """"
@@ -284,9 +284,4 @@ def train_search_model(papers, f):
                         preprocessed_texts = preprocessed_texts,
                         datasets = f)
   bm25.save_model(f'papers_search')
-
-
-
-
-
 
