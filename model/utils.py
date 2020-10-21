@@ -93,6 +93,7 @@ class BM25Okapi_custom(BM25Okapi):
 
     def dataset_search(self, query):
         texts, titles = get_text_title(self.df)
+        query = changing_for_right_query(query, self.datasets, 90)
         (result1, indexes_bm), right_query_name = query_bm(query, self, self.datasets, self.preprocessed_texts, titles)
         result2, indexes_query = query_table(query, self.df)
         final_result = []
@@ -211,17 +212,17 @@ def prepare_datasets_name_from_table(df):
             df.datasets[i] = []
 
 def changing_for_right_query(query, f, treshhold = 90):
-    for line in f:
-      if fuzz.WRatio(query,line) >= treshhold:
-        query = line
-        break
+    while treshhold > 0:
+        for line in f:
+            if fuzz.WRatio(query,line) >= treshhold:
+                return line
+        treshhold -= 10
     return query
 
 def query_bm(query, model, f, preprocessed_texts, titles, n = 10):
     """
     Gives list of names of the articles which contain name of the dataset in its text
     """
-    query = changing_for_right_query(query, f, 50)
     prep_query = QueryPreprocessing(query) 
     indexes = model.get_top_n_indices(prep_query.get_preprocessed(), preprocessed_texts, n=10)
     result = ([titles[i] for i in indexes], indexes)
