@@ -105,7 +105,7 @@ class BM25Okapi_custom(BM25Okapi):
         final_result = final_result + [y for y in result1 if y not in final_result]
         final_result = final_result + [y for y in result2 if y not in final_result]
 
-        return [(str(ind), right_query_name, str(self.df[self.df['title']==x].year.values[0]), self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
+        return [(str(self.df['id'][ind]), right_query_name, str(self.df[self.df['title']==x].year.values[0]), self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
             
         
 
