@@ -48,7 +48,8 @@ class BM25Okapi_custom(BM25Okapi):
             self.datasets = pickle.load(f)
           self.preprocessed_texts = json.load(Path(f'{path}/preprocessed_texts.json').open('r')) 
           self.df = pd.read_csv(f'{path}/df.csv')
-        except:
+        except Exception as e:
+          print(e)
           self.datasets = None
           self.preprocessed_texts = None
           self.df = None
@@ -83,12 +84,12 @@ class BM25Okapi_custom(BM25Okapi):
           year = self.df[self.df['title'] == title]['year'].tolist()[0]
           authors = self.df[self.df['title'] == title]['name'].tolist()[0]
           prep_paper = PaperPreprocessing(texts[index])
-          paper_model = BM25Okapi_custom(path=f"./papers_models/{'_'.join(title.lower().split())}")
+          paper_model = BM25Okapi_custom(path=f"papers_models/{'_'.join(title.lower().split())}")
           indeces = paper_model.get_top_n_indices(prep_query.get_preprocessed(), 
                                             prep_paper.get_preprocessed(), n=3)
           interesting_parts = prep_paper.get_context(indeces, left=1, right=2)
 
-          response.append((index, title, year, authors, interesting_parts))
+          response.append((str(index), title, str(year), authors, interesting_parts))
         return response
 
     def dataset_search(self, query):
@@ -104,7 +105,7 @@ class BM25Okapi_custom(BM25Okapi):
         final_result = final_result + [y for y in result1 if y not in final_result]
         final_result = final_result + [y for y in result2 if y not in final_result]
 
-        return [(ind, self.df[self.df['title']==x].year.values[0], self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
+        return [(str(ind), str(self.df[self.df['title']==x].year.values[0]), self.df[self.df['title']==x].name.values[0], x) for x, ind in zip(final_result, indexes)]
             
         
 

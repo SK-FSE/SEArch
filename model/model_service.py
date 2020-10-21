@@ -1,4 +1,10 @@
-import joblib
+from .utils import *
+
+def retrain_model():
+    papers, f = load_data('data/')
+    papers = papers.sample(200)
+    train_models(papers)
+    train_search_model(papers, f)
 
 
 class Model:
@@ -14,18 +20,17 @@ class Model:
             cls.__instance = object.__new__(cls)
         return cls.__instance
 
-    def _load_model(self, use_mock=True):
+    def _load_model(self, use_mock=False):
         if use_mock:
             self.model = MockModel()
-
         else:
-            self.model = joblib.load('model_name')
+            self.model = BM25Okapi_custom(path='papers_search/')
 
     def get_datasets_by_query(self, query):
-        return self.model.predict(query, datasets=True)
+        return self.model.dataset_search(query)
 
     def get_articles_by_query(self, query):
-        return self.model.predict(query, datasets=False)
+        return self.model.paper_search(query)
 
 
 class MockModel:

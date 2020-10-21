@@ -6,6 +6,8 @@ from src import query_processor
 import sqlite3 as sql
 import os
 from config import Config
+from model import model_service 
+import sys
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -64,4 +66,9 @@ def list():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        print('preparing model')
+        model_service.retrain_model()
+    print('model ready')
+    model = model_service.Model()
     app.run(debug=True, use_reloader=True, host='0.0.0.0')
