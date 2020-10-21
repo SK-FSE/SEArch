@@ -99,9 +99,8 @@ class BM25Okapi_custom(BM25Okapi):
         final_result = []
         indexes = []
         for x, ind in zip(result1, indexes_bm):
-            if x in result2:
-                final_result.append(x)
-                indexes.append(ind)
+            final_result.append(x)
+            indexes.append(ind)
         final_result = final_result + [y for y in result1 if y not in final_result]
         final_result = final_result + [y for y in result2 if y not in final_result]
 
