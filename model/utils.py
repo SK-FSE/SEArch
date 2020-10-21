@@ -88,7 +88,7 @@ class BM25Okapi_custom(BM25Okapi):
                                             prep_paper.get_preprocessed(), n=3)
           interesting_parts = prep_paper.get_context(indeces, left=1, right=2)
 
-          response.append((str(index), title, str(year), authors, interesting_parts))
+          response.append((str(self.df['id'][index]), title, str(year), authors, interesting_parts))
         return response
 
     def dataset_search(self, query):
