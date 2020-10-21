@@ -27,10 +27,14 @@
 
 		</form>
 	</div>
-
 	<div class="Results">
 		<!-- <caption>Results</caption> -->
 		<table id="myTable">
+            <tr>
+				<td colspan="2" class="dataset">
+					{{ res['hits'][0]['dataset'] }}
+				</td>
+			</tr>
             {% for hit in res['hits'] %}
 			<tr class="filter">
 				<td class="year">
@@ -50,10 +54,7 @@
                 </td>
 			</tr>
 			<tr>
-                <td class="dataset">
-                    {{ hit['dataset'] }}
-                </td>
-				<td class="dataset_part">
+				<td colspan="2" class="dataset_part">
 					<blockquote>
 					<!-- part of the text with dataset from articles -->
                         {{   hit['article_piece'] }}
