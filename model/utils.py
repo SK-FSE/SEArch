@@ -221,7 +221,7 @@ def query_bm(query, model, f, preprocessed_texts, titles, n = 10):
     """
     Gives list of names of the articles which contain name of the dataset in its text
     """
-    query = changing_for_right_query(query, f, 1000)
+    query = changing_for_right_query(query, f, 50)
     prep_query = QueryPreprocessing(query) 
     indexes = model.get_top_n_indices(prep_query.get_preprocessed(), preprocessed_texts, n=10)
     result = ([titles[i] for i in indexes], indexes)
