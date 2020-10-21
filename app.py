@@ -23,14 +23,16 @@ def search():
     if request.method == 'POST':
         search_text = request.form.get('search_text')
         session['data'] = query_processor.get_search_result(search_text, False)
-        return redirect('/search/results')
+        return redirect(url_for('.search_request', search_text=search_text))
     return render_template('search.html', title="Search")
 
 @app.route('/search/results', methods=['GET', 'POST'])
 def search_request():  # when we searching again from results page
 
-    res = session.get('data', None)
+    # res = session.get('data', None)
     search_text = request.form.get('search_text')
+    search_text_old = request.args['search_text']
+    res = query_processor.get_search_result(search_text_old, False)
     if search_text != res['query'] and search_text is not None and search_text != '':
         if request.form['button'] == 'Basic':
             is_deep = False
