@@ -24,7 +24,6 @@ def get_search_result(query: str, is_deep: bool):
                              'title': dataset[4],
                              'year': dataset[2],
                              'author': str_to_list(dataset[3]),
-                             'article_piece': 'dataset_piece',
                              'dataset': dataset[1]})
             res['hits'] = hits
 
