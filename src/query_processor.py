@@ -7,7 +7,7 @@ import typing as tp
 # backend logic should start here
 def str_to_list(s):
     if len(s) > 2:
-        return s[1: -1].replace('\'', '').split(',')
+        return ', '.join(s[1: -1].replace('\'', '').split(','))
     return s
 
 def get_search_result(query: str, is_deep: bool):

@@ -30,12 +30,8 @@
 	<div class="Results">
 		<!-- <caption>Results</caption> -->
         {% if res['total'] > 0 %}
+            <div class="dataset">{{ res['hits'][0]['dataset'] }}</div>
 		<table id="myTable">
-            <tr>
-				<td colspan="2" class="dataset">
-					{{ res['hits'][0]['dataset'] }}
-				</td>
-			</tr>
             {% for hit in res['hits'] %}
 			<tr class="filter">
 				<td class="year">
