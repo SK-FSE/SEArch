@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="SeARCH:deep search page">
+	<meta name="author" content="Group 2">
+	<title>Hall of fame</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='hall_style.css') }}">
+
+
+<body>
+
+	<div class ="Hall">
+		<h1>HALL OF FAME</h1>
+		
+	</div>
+	<div class = "Table">
+		<table>
+			<thead class = "Head">
+				<tr>
+					<th> Krasavchiks!</th>
+					<th>Complain</th>
+					<th>Our comments</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class = "Winners">
+						Юлиана Лаврухина
+					</td>
+					<td class = "Bug">
+						При разных запросах (в моем случае "Eagle" и "Empress") выдаются похожие статьи.
+					</td>
+					<td class = "Solution"> 
+						Sure, we have a limited number of  articles. Some of them may be similar
+					</td>
+				</tr>
+				<tr>
+					<td  class = "Winners">
+						Юлиана Лаврухина
+					</td>
+					<td class = "Bug">
+						Каждый раз при запросе выдается только 10 результатов.
+					</td>
+					<td class = "Solution">
+						In current solution we have only 1 page. In feature releases we will add pagination. And each page will consist of 10 search results.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+
+</html>

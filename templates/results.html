@@ -27,10 +27,15 @@
 
 		</form>
 	</div>
-
 	<div class="Results">
 		<!-- <caption>Results</caption> -->
+        {% if res['total'] > 0 %}
 		<table id="myTable">
+            <tr>
+				<td colspan="2" class="dataset">
+					{{ res['hits'][0]['dataset'] }}
+				</td>
+			</tr>
             {% for hit in res['hits'] %}
 			<tr class="filter">
 				<td class="year">
@@ -46,14 +51,11 @@
 			<tr>
 				<td colspan="2" class="article">
 					<!-- name of the article -->
-                    <a href="results/{{ hit['id'] }}">{{ hit['title'] }}</a>
+                    <a href="results/{{ hit['id'] }}" target="_blank">{{ hit['title'] }} </a>
                 </td>
 			</tr>
 			<tr>
-                <td class="dataset">
-                    {{ hit['dataset'] }}
-                </td>
-				<td class="dataset_part">
+				<td colspan="2" class="dataset_part">
 					<blockquote>
 					<!-- part of the text with dataset from articles -->
                         {{   hit['article_piece'] }}
@@ -64,6 +66,12 @@
             {% endfor %}
 
 		</table>
+        {% else %}
+            <p class="no_articles">Nothing is found
+            <br>
+            Try to search <a href="http://62.109.13.79:8001" target="_blank">here</a>
+            </p>
+        {% endif %}
     </div>
     <div class="statss">
         <p>Request: "{{ res['query'] }}" Results: ({{ res['total'] }})</p>
