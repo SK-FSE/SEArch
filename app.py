@@ -73,9 +73,6 @@ def hall_of_fame():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        print('preparing model')
-        model_service.retrain_model()
-    print('model ready')
+    model_service.retrain_model()
     model = model_service.Model()
     app.run(debug=True, use_reloader=True, host='0.0.0.0')
